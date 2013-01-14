@@ -39,6 +39,7 @@ public class Log4jLogger implements Logger {
 
     @Override
     public void debug(Object m, Throwable t) {
+        logger.debug(m, t);
     }
 
     public org.apache.log4j.Logger getLogger() {
