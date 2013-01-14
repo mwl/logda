@@ -2,6 +2,7 @@ package dk.mwl.logda.log4j;
 
 import dk.mwl.logda.Logger;
 import dk.mwl.logda.Message;
+import org.apache.log4j.Level;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,12 +49,12 @@ public class Log4jLoggerTest {
         Message m = Mockito.mock(Message.class);
         org.apache.log4j.Logger log4j = PowerMockito.mock(org.apache.log4j.Logger.class);
         when(m.message()).thenReturn(message);
-        when(log4j.isDebugEnabled()).thenReturn(true);
+        when(log4j.isEnabledFor(Level.DEBUG)).thenReturn(true);
 
         Logger logger = new Log4jLogger(log4j);
         logger.debug(m);
 
-        verify(log4j).debug(message);
+        verify(log4j).log(Level.DEBUG, message);
     }
 
     @Test
@@ -64,12 +65,12 @@ public class Log4jLoggerTest {
         Message m = Mockito.mock(Message.class);
         org.apache.log4j.Logger log4j = PowerMockito.mock(org.apache.log4j.Logger.class);
         when(m.message()).thenReturn(message);
-        when(log4j.isDebugEnabled()).thenReturn(true);
+        when(log4j.isEnabledFor(Level.DEBUG)).thenReturn(true);
 
         Logger logger = new Log4jLogger(log4j);
         logger.debug(m, t);
 
-        verify(log4j).debug(message, t);
+        verify(log4j).log(Level.DEBUG, message, t);
     }
 
     @Test
